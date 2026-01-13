@@ -1,0 +1,2500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City-Vape</title>
+<header>
+<img src="logg.png" alt="website Logo" id="logo">
+</header>
+<div id="top-bar">
+  <a href="https://wa.me/message/IXYMUJRDLYOXA1" target="_blank">
+    <img src="wa.png" alt="WhatsApp" class="icon"> Whatsapp
+  </a>
+  <a href="https://www.instagram.com/cityvpsy?igsh=MXVuejZkYnE4cXNrOQ==" target="_blank">
+    <img src="insta.png" alt="Instagram" class="icon"> Instagram
+  </a>
+</div>
+<style>
+#top-bar {
+  position: fixed;        
+  top: 0;                 
+  left: 0;              
+  width: 100%;            
+  background-color: #dcdcdc;
+  padding: 15px 0;        
+  display: flex;
+  justify-content: center; 
+  gap: 30px;               
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  z-index: 1000;         
+}
+
+#top-bar a {
+  color: black;
+  text-decoration: none;
+font-weight: bold;
+display: flex;
+align-items: center;
+gap: 2px;
+}
+
+#top-bar a:hover {
+  color: #ff9d00;
+
+}
+.icon {
+
+    width: 15px;
+    height: 15px;
+}
+#image-slider {
+  position: relative;
+  max-width: 230px;      /* تصغير عرض الـ slider */
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 10px;
+  font-size: 12px;       /* تصغير حجم النصوص داخل الزر */
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  display: none;
+  height: auto;           /* يحافظ على نسبة الصورة */
+}
+
+.slide.active {
+  display: block;
+}
+
+#image-slider button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 2px 8px;           /* تصغير حجم الزر */
+  cursor: pointer;
+  font-size: 14px;        /* تصغير السهم */
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#image-slider:hover button {
+    opacity: 1;
+}
+#prev { left: 5px; }
+#next { right: 5px; }
+</style>
+</head>
+
+
+
+
+
+<body>
+
+<div class="search-container">
+  <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="Search now..."
+  >
+  <button id="searchBtn">🔍︎</button>
+</div>
+<div id="noResults">لم يتم الحصول على نتائج</div>
+
+
+<!-- زر التلت شخطات -->
+<div id="menu-btn">☰</div>
+
+<!-- السلايد منيو -->
+<nav id="side-menu">
+  <!-- زر إكس لإغلاق القائمة -->
+  <div id="close-btn">✖</div>
+
+  <ul>
+    
+    <li><a href="index.html">Home</a></li>
+    <li class="toggle">E-Liquid
+      <ul class="sub-menu">
+        <li><a href="salt.html">.Salt Nicotine</a></li>
+        <li><a href="freebase.html">.Free Base</a></li>
+      </ul>
+    </li>
+    <li><a href="devices.html">Devices</a></li>
+    <li><a href="pod-system.html">Pod System</a></li>
+    <li><a href="coils.html">Coils</a></li>
+    <li class="toggle">Contact
+      <ul class="sub-menu">
+        <li><a href="https://wa.me/message/IXYMUJRDLYOXA1">.Whatsapp</a></li>
+        <li><a href="https://www.instagram.com/cityvpsy?igsh=MXVuejZkYnE4cXNrOQ==">.Instagram</a></li>
+      </ul>
+    </li>
+    <li class="toggle">Directions
+      <ul class="sub-menu">
+        <li><a href="branch1.html">Branch Al-Jahiz</a></li>
+        <li><a href="branch2.html">Branch Masaken Barzeh</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<style>
+
+
+
+
+
+
+
+
+#side-menu li.e-liquid .sub-menu li {
+
+margin-bottom: 0px;
+margin-top: 0px;
+}
+#side-menu li.e-liquid{
+
+margin-bottom: 12px;
+
+
+}
+  .menu-logo {
+display: block;
+width: 100px;
+height: 100px;
+margin: 0 auto 20px auto;
+
+
+  }
+ /* ================================
+   MENU BUTTON (☰ ثابت وفوق كل شيء)
+================================ */
+#menu-btn {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10002;
+  user-select: none;
+  transition: color 0.3s ease;
+  color: #222;
+}
+
+#menu-btn:hover {
+  color: #ff7a00;
+}
+
+/* ================================
+   SIDE MENU
+================================ */
+#side-menu {
+  position: fixed;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  max-width: 280px;
+  height: 100vh;
+  background: #ffffff;
+  padding-top: 60px;
+  transition: left 0.35s ease;
+  z-index: 10001;
+  direction: ltr; /* الكتابة على اليسار */
+  box-shadow: 2px 0 12px rgba(0,0,0,0.2);
+  border-right: 1px solid #ddd;
+}
+
+/* تظهر القائمة */
+#side-menu.active {
+  left: 0;
+}
+
+/* ================================
+   CLOSE BUTTON
+================================ */
+#close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #222;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+#close-btn:hover {
+  color: #ff7a00;
+}
+
+/* ================================
+   MENU LIST
+================================ */
+#side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#side-menu li {
+  padding: 2px 0 2px 12px;
+  text-align: left;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+}
+
+#side-menu a,
+#side-menu .toggle {
+  display: block;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+#side-menu a:hover,
+#side-menu .toggle:hover {
+  color: #ff7a00;
+}
+
+/* ================================
+   SUB MENU
+================================ */
+.sub-menu {
+  display: none;
+  margin-top: 6px;
+}
+
+.sub-menu li {
+  padding: 6px 0 6px 12px;
+}
+
+.sub-menu a {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+}
+
+.sub-menu a:hover {
+  color: #ff7a00;
+}
+
+/* ================================
+   RESPONSIVE (MOBILE)
+================================ */
+@media (max-width: 768px) {
+  #side-menu {
+    width: 40%;
+    left: -40%;
+  }
+
+  #side-menu li {
+    padding: 12px 14px;
+  }
+
+  #side-menu a,
+  #side-menu .toggle {
+    font-size: 16px;
+  }
+}
+
+
+
+
+
+</style>
+<!-- أزرار الفلترة -->
+<div id="filter-buttons" style="margin-top: 10px; text-align: center;">
+  <button onclick="location.href='freebase.html'"style="padding: 8px 15px; margin-right: 10px; background-color: #FFA500; border: none; border-radius: 5px; cursor: pointer;">
+    Freebase
+  </button>
+  <button onclick="location.href='salt.html'" style="padding: 8px 15px; background-color: #FFA500; border: none; border-radius: 5px; cursor: pointer;">
+    SaltNic
+  </button>
+<button onclick="location.href='vapes.html'" style="padding: 8px 15px; background-color: #FFA500; border: none; border-radius: 5px; cursor: pointer;">
+    Vapes
+  </button>
+<button onclick="location.href='disposables.html'" style="padding: 8px 15px; background-color: #FFA500; border: none; border-radius: 5px; cursor: pointer;">
+    Disposables
+  </button>
+</div>
+
+
+
+
+<div class="product" data-name="vape nexlim pod system">
+  <div class="product-image-wrapper">
+    <img src="pod system nexlim.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">nexlim-pod system </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">35$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=nexlim-pod-system" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="product" data-name="vape vaporesso gen max kit">
+  <div class="product-image-wrapper">
+    <img src="vaporesso geen max kit.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">vaporesso-gen max kit</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    <input type="text" name="nicotine" value="mtl">
+    TWO BATTERY
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">60$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=vaporesso-gen-max-twobattery" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+<div class="product" data-name="vape vaporesso gen se kit">
+  <div class="product-image-wrapper">
+    <img src="vaporesso geen max kit.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">vaporesso-gen se kit</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    <input type="text" name="nicotine" value="mtl">
+    one BATTERY
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">50$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=vaporesso-gen-max-onebattery" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="product" data-name="vape voopoo drag s2">
+  <div class="product-image-wrapper">
+    <img src="voopoo drag s2.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">voopoo-drag s2</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">36$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=voopoo-drag-s2" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="product" data-name="cotton firebolt">
+  <div class="product-image-wrapper">
+    <img src="firebolt cotton.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">firebolt-cotton</h3>
+  <!-- خيارات النيكوتين -->
+  
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">6.5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=firebolt-cotton" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="product" data-name="cotton hellvape">
+  <div class="product-image-wrapper">
+    <img src="hellvape.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">hellvape-cotton</h3>
+  <!-- خيارات النيكوتين -->
+  
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">6.5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=hellvape-cotton" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="product" data-name="vape vaporesso armour g">
+  <div class="product-image-wrapper">
+    <img src="armour.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">vaporesso-armour g</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">38$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=vaporesso-armour-g" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+<div class="product" data-name="vape Uwell caliburn g3 pro">
+  <div class="product-image-wrapper">
+    <img src="cali.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">Uwell caliburn-g3 pro</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">30$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=uwell-caliburn-g3-pro" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="product" data-name="vape vaporesso xros nano 4">
+  <div class="product-image-wrapper">
+    <img src="xros.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">vaporesso-xros nano 4</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">30$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=vaporesso-xros-nano-4" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="product" data-name="vape vaporesso armour max">
+  <div class="product-image-wrapper">
+    <img src="vapo.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">vaporesso-armour max</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">60$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=vaporesso-armour-max" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="product" data-name="vape voopoo argus pro 2">
+  <div class="product-image-wrapper">
+    <img src="voopoo argus pro 2.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">voopoo-argus pro 2</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">38$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=voopoo-argus-pro2" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="product" data-name="vape oxva xlim pro 2">
+  <div class="product-image-wrapper">
+    <img src="oxva.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">oxva-xlim pro 2</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">25$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=oxva-xlim-pro2" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div class="product" data-name="vape vaporesso armour s">
+  <div class="product-image-wrapper">
+    <img src="vapo.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">vaporesso-armour s</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">50$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=vaporesso-armour-s" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="product" data-name="vape uwell gk3 lite">
+  <div class="product-image-wrapper">
+    <img src="gk3.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">uwell-gk3 lite</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">17$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=uwell-gk3-lite" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div class="product" data-name="vape uwell gk3 pro">
+  <div class="product-image-wrapper">
+    <img src="uwell gk3 pro.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">uwell-gk3 pro</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">30$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=uwell-gk3-pro" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="product" data-name="vape uwell g3 lite">
+  <div class="product-image-wrapper">
+    <img src="uwell g3 lite.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">uwell-g3 lite</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">16$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=uwell-g3-lite" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+<div class="product" data-name="vape uwell g4 pro">
+  <div class="product-image-wrapper">
+    <img src="g4 pro.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">uwell-g4 pro</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">35$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=uwell-g4-pro" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="product" data-name="vape oxva xlim go 2">
+  <div class="product-image-wrapper">
+    <img src="oxva xlim go 2.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">oxva-xlim go 2</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">16$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=oxva-xlim-go2" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div class="product" data-name="vape oxva nexlim go">
+  <div class="product-image-wrapper">
+    <img src="oxva nexlim go.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">oxva-nexlim go </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">17$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=oxva-nexlim-go" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="product" data-name="vape oxva xlim pro 2 dna version">
+  <div class="product-image-wrapper">
+    <img src="oxva xlim pro 2 dna version.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">oxva-xlim pro 2 dna version</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">38$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=oxva-xlim-pro2-dna-version" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="product" data-name="vape vaporesso xros 5">
+  <div class="product-image-wrapper">
+    <img src="vaporesso xros 5.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">vaporesso-xros 5</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">30$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=vaporesso-xros-5" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="product" data-name="vape oxva xlim 3 ultra">
+  <div class="product-image-wrapper">
+    <img src="oxva xlim ultra.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">oxva-xlim 3 ultra</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    MTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">30$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=oxva-xlim-3-ultra" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="product" data-name="vape voopoo vinci e120">
+  <div class="product-image-wrapper">
+    <img src="VOOPOO vinci e120.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">voopoo-vinci e120</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">45$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=voopoo-vinci-e120" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="product" data-name="vape voopoo vinci spark 220 kit">
+  <div class="product-image-wrapper">
+    <img src="voopoo vinci spark 220 kit.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">voopoo-vinci spark 220 kit</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">58$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=voopoo-vinci-spark-220kit" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+<div class="product" data-name="vape voopoo vinci spark 100 kit">
+  <div class="product-image-wrapper">
+    <img src="voopoo spark vinci 100 kit.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">voopoo-vinci spark 100 kit</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+   
+    
+    <input type="text" name="nicotine" value="mtl">
+    DTL
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">50$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=voopoo-vinci-spark-100kit" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="product" data-name="coils vaporesso gti">
+  <div class="product-image-wrapper">
+    <img src="gti.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">coils-vaporesso GTI</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.5/
+     <input type="text" name="nicotine" value="mtl2">
+    0.4/
+     <input type="text" name="nicotine" value="mtl3">
+    0.2/
+     <input type="text" name="nicotine" value="mtl4">
+    0.15
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=coils-vaporesso-gti" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div class="product" data-name="coils vaporesso gtx">
+  <div class="product-image-wrapper">
+    <img src="gtx coils.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">coils-vaporesso GTX</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.15/
+     <input type="text" name="nicotine" value="mtl2">
+    0.2/
+     <input type="text" name="nicotine" value="mtl3">
+    0.3/
+     <input type="text" name="nicotine" value="mtl4">
+    0.4/
+    <input type="text" name="nicotine" value="mtl4">
+    0.6/
+    <input type="text" name="nicotine" value="mtl4">
+    0.8/
+    <input type="text" name="nicotine" value="mtl4">
+    1.2
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">3.5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=coils-vaporesso-gtx" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+<div class="product" data-name="coils vaporesso xros pod">
+  <div class="product-image-wrapper">
+    <img src="xros pods.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">coils-vaporesso xros pod</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.4/
+     <input type="text" name="nicotine" value="mtl2">
+    0.6/
+     <input type="text" name="nicotine" value="mtl3">
+    0.8/
+     <input type="text" name="nicotine" value="mtl4">
+    0.7/
+    <input type="text" name="nicotine" value="mtl4">
+    1.0/
+    <input type="text" name="nicotine" value="mtl4">
+    1.2
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=coils-vaporesso-xros-pod" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="product" data-name="coils voopoo pnpx ">
+  <div class="product-image-wrapper">
+    <img src="pnpx.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">coils-voopoo pnpx</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.2/
+     <input type="text" name="nicotine" value="mtl2">
+    0.3/
+     <input type="text" name="nicotine" value="mtl3">
+    0.15/
+     <input type="text" name="nicotine" value="mtl4">
+    0.6/
+    <input type="text" name="nicotine" value="mtl4">
+    0.8/
+    
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=coils-voopoo-pnpx" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div class="product" data-name="coils voopoo pnp ">
+  <div class="product-image-wrapper">
+    <img src="pnp coil.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">coils-voopoo pnp</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.15/
+     <input type="text" name="nicotine" value="mtl2">
+    0.2/
+     <input type="text" name="nicotine" value="mtl3">
+    0.3/
+     <input type="text" name="nicotine" value="mtl4">
+    0.45/
+    <input type="text" name="nicotine" value="mtl4">
+    0.6/
+    <input type="text" name="nicotine" value="mtl4">
+    0.8/
+    <input type="text" name="nicotine" value="mtl4">
+    1.2/
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=coils-voopoo-pnp" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="product" data-name="coils voopoo pnpll ">
+  <div class="product-image-wrapper">
+    <img src="pnpll.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">coils-voopoo pnpll</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.3/
+     <input type="text" name="nicotine" value="mtl2">
+    0.2/
+     <input type="text" name="nicotine" value="mtl3">
+    0.15/
+    
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=coils-voopoo-pnpll" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="product" data-name="pod voopoo pnpll ">
+  <div class="product-image-wrapper">
+    <img src="voopoo pnpll empty pod.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-voopoo pnpll empty pod</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=empty-pod-voopoo-pnpll" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div class="product" data-name="pod voopoo vinci ">
+  <div class="product-image-wrapper">
+    <img src="vinci pod.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-voopoo vinci empty pod</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=empty-pod-voopoo-vinci" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="product" data-name="pod vaporesso armour g ">
+  <div class="product-image-wrapper">
+    <img src="armour g pod.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-vaporesso armour g empty pod</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=empty-pod-vaporesso-armour-g" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+<div class="product" data-name="pod voopoo pnp mtl ">
+  <div class="product-image-wrapper">
+    <img src="pnp mtl.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-voopoo pnp mtl empty pod</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=empty-pod-voopoo-pnp-mtl" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="product" data-name="pod voopoo pnp dl ">
+  <div class="product-image-wrapper">
+    <img src="pnp dl.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-voopoo pnp dl empty pod</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=empty-pod-voopoo-pnp-dl" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+<div class="product" data-name="pod caliburn g empty ">
+  <div class="product-image-wrapper">
+    <img src="g pod.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-caliburn g empty pod</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=empty-pod-g-caliburn" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="product" data-name="pod caliburn g2 empty ">
+  <div class="product-image-wrapper">
+    <img src="g2.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-caliburn g2 empty pod</h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=empty-pod-g2-caliburn" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="product" data-name="coil caliburn g  ">
+  <div class="product-image-wrapper">
+    <img src="g coils.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">coil-caliburn g </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.8/
+     <input type="text" name="nicotine" value="mtl2">
+    1.0/
+     <input type="text" name="nicotine" value="mtl3">
+    1.2/
+    
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=coil-g-caliburn" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<div class="product" data-name="pod caliburn g3  ">
+  <div class="product-image-wrapper">
+    <img src="p3 pod.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-caliburn g3 </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.6/
+     <input type="text" name="nicotine" value="mtl2">
+    0.9
+    
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=pod-g3-caliburn" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+<div class="product" data-name="pod caliburn g4  ">
+  <div class="product-image-wrapper">
+    <img src="p4 pod.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-caliburn g4 </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.4/
+     <input type="text" name="nicotine" value="mtl2">
+    0.6/
+     <input type="text" name="nicotine" value="mtl3">
+    0.9/
+    <input type="text" name="nicotine" value="mtl3">
+    1.2
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=pod-g4-caliburn" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="product" data-name="pod caliburn a2  ">
+  <div class="product-image-wrapper">
+    <img src="a2 pod.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-caliburn a2 </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+     <input type="text" name="nicotine" value="mtl3">
+    0.9
+
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=pod-a2-caliburn" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+<div class="product" data-name="pod caliburn x ">
+  <div class="product-image-wrapper">
+    <img src="ggggg.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-caliburn x empty pod </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=pod-caliburn-x-empty-pod" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+<div class="product" data-name="pod oxva xlim 2ml  ">
+  <div class="product-image-wrapper">
+    <img src="oxva 2ml.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-oxva xlim 2ml </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.4/
+     <input type="text" name="nicotine" value="mtl2">
+    0.6/
+     <input type="text" name="nicotine" value="mtl3">
+    0.8/
+    <input type="text" name="nicotine" value="mtl3">
+    1.2
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=pod-oxva-xlim-2ml" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+<div class="product" data-name="pod oxva xlim 3ml  ">
+  <div class="product-image-wrapper">
+    <img src="oxva 3ml.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-oxva xlim 3ml </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+
+     <input type="text" name="nicotine" value="mtl2">
+    0.6/
+     <input type="text" name="nicotine" value="mtl3">
+    0.8
+
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">4.5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=pod-oxva-xlim-3ml" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="product" data-name="pod oxva nexlim ">
+  <div class="product-image-wrapper">
+    <img src="ssdsds.jpg" alt="Product " class="product-image">
+    <!-- الشعار يغطي الصورة بالكامل -->
+    <img src="logg.png" alt="Logo" class="product-logo">
+  </div>
+<h3 class="product-name">pod-oxva nexlim </h3>
+  <!-- خيارات النيكوتين -->
+  <div class="nicotine-options">
+  <label class="nicotine-btn">
+    <input type="text" name="nicotine" value="mtl1">
+    0.4/
+     <input type="text" name="nicotine" value="mtl2">
+    0.8/
+    <input type="text" name="nicotine" value="mtl3">
+    1.2
+  </label>  
+</div>
+
+  <!-- السعر -->
+  <div class="product-price2">
+    Price: <span class="price-value">5$</span>
+  </div>
+<!----------------------------product buy--------------------------------->
+  <div class="buy-now">
+    <a href="https://wa.me/963998067029?text=pod-oxva-nexlim" class="buy-btn">Buy</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+<style>
+
+
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 30px auto;
+}
+
+#searchInput {
+  width: 220px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#searchBtn {
+  padding: 8px 14px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #ccc;
+}
+
+#noResults {
+  display: none;             /* مخفي افتراضياً */
+  position: fixed;           /* مثبت بالنسبة للنافذة */
+  bottom: 20px;              /* المسافة من أسفل الصفحة */
+  left: 50%;                 /* تمركز أفقي */
+  transform: translateX(-50%); /* تمركز تمام */
+  width: 250px;              /* عرض البوكس */
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f5f5f5;
+  font-size: 13px;
+  color: #555;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* لمسة احترافية */
+  z-index: 1000;             /* فوق كل العناصر */
+}
+
+#menu-btn {
+  font-size: 28px;
+  cursor: pointer;
+  color: gray;
+  position: fixed;
+  top: 50px;
+  left: 10px;
+  z-index: 10000;
+  font-size: 24px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c1c1c1;
+  padding: 5px 5px;
+  border-radius: 2px;
+
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100%;
+  background-color: rgba(199, 199, 199, 0.7);
+  transform: translateX(-100%);
+  transition: 0.3s ease;
+  padding: 20px;
+  z-index: 9999;
+
+}
+
+.side-menu.open {
+  transform: translateX(0);
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 60px 0 0 0 ;
+}
+
+.side-menu li {
+  margin-bottom: 15px;
+}
+
+.side-menu a,
+.submenu-toggle {
+  text-decoration: none;
+  color: #000000;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 2px;
+  margin-top: 0;
+  padding: 2px 0;
+}
+
+.submenu {
+  display: none;
+  margin: 0;
+  padding-left: 15px;
+}
+
+.submenu li {
+  margin: 0;
+  padding: 2px 0;
+}
+body {
+
+  overflow-x: hidden;
+}
+/* كل أسماء القائمة الجانبية */
+.side-menu span,
+.side-menu a {
+  font-size: 30px;       /* حجم الخط */
+  font-weight: bold;      /* الخط عريض */
+  color: rgb(103, 103, 103);           /* اللون الأساسي */
+  text-decoration: none;  /* إزالة الخط تحت النص */
+  transition: color 0.3s; /* حركة سلسة عند تغيير اللون */
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* تأثير hover */
+.side-menu span:hover,
+.side-menu a:hover {
+  color: rgb(255, 170, 0);          /* يتحول أصفر عند المرور بالماوس */
+}
+
+.side-menu .menu-item {
+width: 100%;
+background: none;
+border: none;
+color: #7a7a7a;
+font-size: 30px;
+text-align: left;
+padding: 10px 15px;
+display: flex;
+align-items: center;
+cursor: pointer;
+transition: color 0.3s background 0.3;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.side-menu .menu-item .icon {
+margin-right: 10px;
+font-size: 30px;
+position: relative;
+top: -2px;
+
+
+}
+.side-menu .menu-item:hover {
+
+color: rgb(255, 170, 0);
+
+}
+#direction-box {
+  background-color: #c1c1c1;  /* لون الخلفية للصندوق */
+  padding: 10px;
+  margin-top: 5px;            /* مسافة بين الزر والصندوق */
+  border-radius: 8px;          /* حواف ناعمة */
+  display: none;               /* مخفي بالافتراض */
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  align-items: center;
+}
+
+#direction-box p {
+  margin: 5px 0;     /* مسافة صغيرة بين العناوين */
+  text-decoration: none;
+
+}
+#direction-btn {
+border: 2px solid gray;
+border-radius: 5px;
+padding: 8px 12px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s;
+}
+#contact-box {
+  background-color: transparent;
+  padding: 5px;
+  margin-top: 5px;
+  display: none;
+  text-align: center;
+}
+
+#contact-box a {
+  display: flex;
+  align-items: center;
+  gap: 8px;          /* المسافة بين الصورة والكلمة */
+  text-decoration: none;
+  color: rgb(122, 122, 122);
+  font-weight: normal;
+  margin: 3px 0;
+  transition: color 0.3s;
+  font-size: 20px;
+
+}
+
+#contact-box a:hover {
+  color: rgb(255, 196, 0);      /* تأثير عند المرور */
+}
+
+.contact-icon {
+  width: 24px;        /* عرض الصورة */
+  height: 24px;       /* ارتفاع الصورة */
+  object-fit: contain;
+
+}
+#contact-btn {
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+font-weight: bold;
+margin-left: -16px;
+color: (122,122,122);
+}
+/* ستايل الزر container */
+/* ستايل الزر container */
+#filter-buttons {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ستايل الأزرار */
+#filter-buttons button {
+  background-color: #ff7a00  !important; /* لون الزر */
+  color: white; /* لون النص */
+  padding: 5px 8px !important; /* تصغير مساحة الزر داخلياً */
+  width: 70px; /* عرض الزر */
+  height: 30px; /* ارتفاع الزر */
+  font-size: 10px; /* حجم الخط */
+  border: none; 
+  border-radius: 5px; /* حواف مستديرة */
+  cursor: pointer;
+}
+
+#filter-buttons button:hover {
+ transform: scale(1.03);
+  background-color: #e69500; /* تأثير عند المرور بالماوس */
+}
+  /*----------------------------product css---------------------------------*/
+
+.product {
+border-radius: 6px;
+padding: 10px;
+text-align: center;
+width: 180px;
+margin: 10px;
+display: inline-block;
+vertical-align: top;
+margin-left: 30px;
+
+}
+h3 {
+text-align: center;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+border-bottom: solid 2px;
+padding-bottom: 8px;
+
+
+
+}
+.product-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;        /* يغطي عرض الصورة بالكامل */
+  height: 100%;       /* يغطي طول الصورة بالكامل */
+  object-fit: cover;  /* يحافظ على تناسق الشعار */
+  opacity: 0.2;       /* شفافية بسيطة */
+}
+.product-image,.product-logo
+{
+
+
+
+  transition: transform 0.35s ease;
+
+}
+.product-image-wrapper:hover .product-image,
+.product-image-wrapper:hover .product-logo {
+
+transform:scale(1.1) ;
+
+
+
+
+}
+.nicotine-options {
+display: flex;
+justify-content: center;
+gap: 10px;
+margin: 10px ;
+}
+.nicotine-btn {
+padding: 5px 10px;
+border: 1px solid #999;
+border-radius: 6px;
+font-size: 13px;
+transition: 0.2s;
+user-select: none;
+cursor: pointer;
+}
+.nicotine-btn input {
+display: none;
+
+}
+.nicotine-btn:has(input:checked){
+border-color: orange;
+font-weight: 600;
+color: orange;
+
+
+}
+.product-price {
+margin-top: 5px;
+font-weight: bold;
+font-size: 14px;
+}
+.buy-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 22px;
+  background-color: #ff7a00;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.buy-btn:hover {
+  background-color: #e96f00;
+  transform: scale(1.05);
+}
+h3 {
+
+font-size: 16px;
+
+
+
+
+}
+/*-----------------css product end-----------------------------*/
+
+
+
+
+
+/*----------------------------product css---------------------------------*/
+
+.product2 {
+border: 1px solid #ccc;
+border-radius: 6px;
+padding: 10px;
+text-align: center;
+width: 180px;
+margin: 10px;
+display: inline-block;
+vertical-align: top;
+}
+h3 {
+text-align: center;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+border-bottom: solid 2px;
+padding-bottom: 8px;
+
+
+
+
+}
+.product-image-wrapper2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.product-image2 {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;        /* يغطي عرض الصورة بالكامل */
+  height: 100%;       /* يغطي طول الصورة بالكامل */
+  object-fit: cover;  /* يحافظ على تناسق الشعار */
+  opacity: 0.2;       /* شفافية بسيطة */
+}
+.product-image2,.product-logo
+{
+
+
+
+  transition: transform 0.35s ease;
+
+}
+.product-image-wrapper2:hover .product-image2,
+.product-image-wrapper2:hover .product-logo {
+
+transform:scale(1.1) ;
+
+
+
+
+}
+.nicotine-options2 {
+display: flex;
+justify-content: center;
+gap: 10px;
+margin: 10px ;
+}
+.nicotine-btn2 {
+padding: 5px 10px;
+border: 1px solid #999;
+border-radius: 6px;
+font-size: 13px;
+transition: 0.2s;
+user-select: none;
+cursor: pointer;
+}
+.nicotine-btn2 input {
+display: none;
+
+}
+.nicotine-btn2:has(input:checked){
+border-color: orange;
+font-weight: 600;
+color: orange;
+
+
+}
+.product-price2 {
+margin-top: 5px;
+font-weight: bold;
+font-size: 14px;
+}
+.buy-btn2 {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 22px;
+  background-color: #ff7a00;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.buy-btn2:hover {
+  background-color: #e96f00;
+  transform: scale(1.05);
+}
+/*-----------------css product end-----------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+<style>
+   
+   @media (max-width: 768px) {
+
+  body {
+    text-align: center;   /* يمسك كل inline-block بالمنتصف */
+  }
+
+  .product {
+    margin: 20px 15px;
+    margin-left: 0 !important;   /* يلغي الميلان */
+    margin-right: 0 !important;
+    width: 180px;                  /* عمودين */
+  }}
+
+header {
+text-align: center;
+margin-top: 40px;
+}
+#logo {
+
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+
+}
+#age-warning {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(255,255,255,1);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+}
+.age-box {
+background: #6c6c6c;
+color: white;
+padding: 30px;
+border-radius: 12px;
+text-align: center;
+max-width: 400px;
+}
+.age-box h2 {
+margin-bottom: 15px;
+}
+.age-box button {
+margin: 10px;
+padding: 10px 20px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+}
+.age-box button:first-child {
+background: #00c853;
+color: rgb(0, 0, 0);
+}
+.age-box button:last-child {
+background: #d50000;
+color: white;
+}
+/* Media Queries للموبايل */
+
+
+
+
+
+</style>
+
+
+
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+const products = document.querySelectorAll(".product");
+const noResults = document.getElementById("noResults");
+
+searchBtn.addEventListener("click", function () {
+  const value = searchInput.value.toLowerCase();
+  let found = false;
+
+  products.forEach(function (product) {
+    const name = product.querySelector("h3").innerText.toLowerCase();
+
+    if (name.includes(value)) {
+      product.style.display = "";
+      found = true;
+    } else {
+      product.style.display = "none";
+    }
+  });
+
+  if (!found) {
+    noResults.style.display = "block";
+  } else {
+    noResults.style.display = "none";
+  }
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const ageBox = document.getElementById("age-warning");
+  const acceptBtn = document.getElementById("acceptBtn");
+
+  if (acceptBtn) {
+    acceptBtn.addEventListener("click", function () {
+      localStorage.setItem("acceptBtn", "yes");
+      ageBox.style.display = "none";
+    });
+  }
+
+  if (false) {
+    ageBox.style.display = "none";
+  }
+
+});
+
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+document.getElementById('next').addEventListener('click', () => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+  slides[current].classList.remove('active');
+  current = (current - 1 + slides.length) % slides.length;
+  slides[current].classList.add('active');
+});
+</script>
+<script>
+const menuBtn = document.getElementById('menu-btn');
+const sideMenu = document.getElementById('side-menu');
+const closeBtn = document.getElementById('close-btn');
+
+menuBtn.addEventListener('click', () => {
+  sideMenu.classList.toggle('active');
+});
+
+closeBtn.addEventListener('click', () => {
+  sideMenu.classList.remove('active');
+});
+
+// فتح وغلق الـsub-menu
+const toggles = document.querySelectorAll('#side-menu .toggle');
+
+toggles.forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const subMenu = toggle.querySelector('.sub-menu');
+    if(subMenu) {
+      subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
